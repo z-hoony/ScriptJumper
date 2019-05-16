@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreMedia
 
 struct SAMITime: CustomStringConvertible {
     let hour: Int, min: Int, second: Float
@@ -23,5 +24,11 @@ struct SAMITime: CustomStringConvertible {
     
     var description: String {
         return String(format: "%02d:%02d:%05.2f", hour, min, second)
+    }
+}
+
+extension SAMITime {
+    var cmTime: CMTime {
+        return CMTime(value: CMTimeValue(self.time), timescale: CMTimeScale(NSEC_PER_USEC))
     }
 }

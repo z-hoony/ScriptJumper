@@ -33,8 +33,7 @@ class Tag {
 
 struct SAMIParser {
     private let ignorableOpenTags: [String] = ["font", "i", "b", "u", "small", "big", "sub", "sup", "q", "s"]
-    private let ignorableCloseTags: [String] = ["/font", "/i", "/b", "/u", "/small", "/big", "/sub", "/sup", "/q", "/s"]
-    private var ignorableTags: [String] { return ignorableOpenTags + ignorableCloseTags }
+    private var ignorableTags: [String] = ["font", "i", "b", "u", "small", "big", "sub", "sup", "q", "s", "/font", "/i", "/b", "/u", "/small", "/big", "/sub", "/sup", "/q", "/s"]
     
     func parse(_ forString: String?) -> [Tag]? {
         guard let forString = forString else { return nil }
@@ -184,6 +183,7 @@ extension Array where Element == Tag {
                 syncs[syncs.count-1].paragraphs.append(para)
             }
         }
+        syncs.removeFirst()
         return syncs
     }
 }

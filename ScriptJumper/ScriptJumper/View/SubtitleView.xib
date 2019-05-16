@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SubtitleView" customModule="ScriptJumper" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="qIK-dq-djU"/>
+                <outlet property="searchBar" destination="vUh-uV-KXe" id="imO-1D-JFB"/>
+                <outlet property="tableView" destination="bdO-Ce-T4e" id="xFf-MW-l9L"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="407" height="840"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8FP-Wm-R1T">
+                    <rect key="frame" x="0.0" y="0.0" width="407" height="840"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="FsR-OE-HCr">
+                        <rect key="frame" x="0.0" y="0.0" width="407" height="840"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                    <blurEffect style="extraLight"/>
+                </visualEffectView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9w8-Rg-fgG" userLabel="Top View">
+                    <rect key="frame" x="0.0" y="44" width="407" height="50"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="자막 목록" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wNd-SS-g8x">
+                            <rect key="frame" x="16" y="14.5" width="64" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GES-aH-q5Q">
+                            <rect key="frame" x="361" y="7" width="30" height="36"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                            <state key="normal" title="✕">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="close" destination="-1" eventType="touchUpInside" id="g26-J9-dt4"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="wNd-SS-g8x" firstAttribute="leading" secondItem="9w8-Rg-fgG" secondAttribute="leadingMargin" constant="8" id="0qR-cf-7Fo"/>
+                        <constraint firstAttribute="trailingMargin" secondItem="GES-aH-q5Q" secondAttribute="trailing" constant="8" id="IAH-de-b6f"/>
+                        <constraint firstItem="GES-aH-q5Q" firstAttribute="centerY" secondItem="9w8-Rg-fgG" secondAttribute="centerY" id="ZFK-UR-PlY"/>
+                        <constraint firstItem="wNd-SS-g8x" firstAttribute="centerY" secondItem="9w8-Rg-fgG" secondAttribute="centerY" id="auq-50-b5b"/>
+                        <constraint firstAttribute="height" constant="50" id="yR7-Sz-74e"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bdO-Ce-T4e">
+                    <rect key="frame" x="0.0" y="94" width="407" height="712"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="자막 및 시각 검색" id="vUh-uV-KXe">
+                        <rect key="frame" x="0.0" y="0.0" width="407" height="44"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="search"/>
+                    </searchBar>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="9w8-Rg-fgG" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="2iD-og-j9h"/>
+                <constraint firstItem="bdO-Ce-T4e" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="FdX-ue-uen"/>
+                <constraint firstItem="8FP-Wm-R1T" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="K1F-xO-W4o"/>
+                <constraint firstItem="bdO-Ce-T4e" firstAttribute="top" secondItem="9w8-Rg-fgG" secondAttribute="bottom" id="KdX-XZ-Qom"/>
+                <constraint firstItem="bdO-Ce-T4e" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="LBk-Gf-uZ9"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="bdO-Ce-T4e" secondAttribute="bottom" id="V3E-nj-6UE"/>
+                <constraint firstItem="9w8-Rg-fgG" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="YAo-Fa-M4Q"/>
+                <constraint firstItem="9w8-Rg-fgG" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="n30-cg-Uyi"/>
+                <constraint firstAttribute="trailing" secondItem="8FP-Wm-R1T" secondAttribute="trailing" id="s7d-45-ofZ"/>
+                <constraint firstAttribute="bottom" secondItem="8FP-Wm-R1T" secondAttribute="bottom" id="tDX-Zi-2Qw"/>
+                <constraint firstItem="8FP-Wm-R1T" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="zfF-qj-pwR"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="132.60869565217394" y="97.767857142857139"/>
+        </view>
+    </objects>
+</document>

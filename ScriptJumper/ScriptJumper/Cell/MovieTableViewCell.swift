@@ -1,16 +1,18 @@
 //
-//  SubtitleTableViewCell.swift
+//  MovieTableViewCell.swift
 //  ScriptJumper
 //
-//  Created by 현지훈 on 09/05/2019.
+//  Created by 현지훈 on 16/05/2019.
 //  Copyright © 2019 현지훈. All rights reserved.
 //
 
 import UIKit
 
-class SubtitleTableViewCell: UITableViewCell {
-    @IBOutlet weak var subtitleLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
+class MovieTableViewCell: UITableViewCell {
+    @IBOutlet weak var fileNameLabel: UILabel!
+    @IBOutlet weak var fileSizeLabel: UILabel!
+    @IBOutlet weak var fileCreationTimeLabel: UILabel!
+    @IBOutlet weak var subtitleExistLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,5 +24,5 @@ class SubtitleTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
 }
