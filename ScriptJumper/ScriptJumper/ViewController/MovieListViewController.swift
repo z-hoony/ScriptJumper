@@ -23,7 +23,7 @@ class MovieListViewController: UIViewController {
         let cellNib = UINib(nibName: String(describing: MovieTableViewCell.self), bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: MovieTableViewCell.identifier)
         
-        self.navigationController?.navigationItem.title = "영화 목록"
+        self.title = "영화 목록"
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }

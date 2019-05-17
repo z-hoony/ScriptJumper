@@ -18,6 +18,8 @@ class PlayerViewController: UIViewController {
     @IBOutlet private weak var subtitleLabelCenterXAnchor: NSLayoutConstraint!
     
     static let nonBreakSpace: String = "&nbsp;"
+    static let subtitleLabelCornerRadius: CGFloat = 4
+    static let subtitleLabelBottomMargin: CGFloat = 16
     
     private var doubleTapGestureRecognizer: UITapGestureRecognizer!
     private var singleTapGestureRecognizer: UITapGestureRecognizer!
@@ -72,7 +74,7 @@ class PlayerViewController: UIViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        try? AVAudioSession.sharedInstance().setActive(false)
+        try? AVAudioSession.sharedInstance().setActive(false, options: [.notifyOthersOnDeactivation])
     }
     
     override func viewDidLayoutSubviews() {
@@ -96,8 +98,12 @@ class PlayerViewController: UIViewController {
         
         singleTapGestureRecognizer.require(toFail: doubleTapGestureRecognizer)
         
-        subtitleLabel.layer.cornerRadius = 4
+        subtitleLabel.layer.cornerRadius = PlayerViewController.subtitleLabelCornerRadius
         subtitleLabel.clipsToBounds = true
+        
+        if movie?.subtitleUrl == nil {
+            self.controlsView.setSubtitleListButton(false)
+        }
     }
     
     func setupPlayer(_ url: URL) {
@@ -129,12 +135,12 @@ class PlayerViewController: UIViewController {
             //원본 자막
             self?.syncs = tags?
                 .toSyncs()
-            
-            //공백 제거 및 검색 필터 적용된 자막
-            self?.filteredSyncs = self?.syncs?
-                .filter { $0.paragraphs.first?.content != PlayerViewController.nonBreakSpace }
                 .filter { $0.time != nil }
                 .sorted { $0.time!.time < $1.time!.time }
+            
+            //공백 제거 및 검색 필터 적용될 자막
+            self?.filteredSyncs = self?.syncs?
+                .filter { $0.paragraphs.first?.content != PlayerViewController.nonBreakSpace }
             
             DispatchQueue.main.async { [weak self] in
                 self?.subtitleView.reloadData()
@@ -162,12 +168,12 @@ class PlayerViewController: UIViewController {
     }
     
     func controlsShow() {
-        subtitleLabelBottomAnchor.constant = 66
+        subtitleLabelBottomAnchor.constant = PlayerViewController.subtitleLabelBottomMargin + ControlsView.controlsHeight
         self.controlsView.show()
     }
     
     func controlsHide() {
-        subtitleLabelBottomAnchor.constant = 16
+        subtitleLabelBottomAnchor.constant = PlayerViewController.subtitleLabelBottomMargin
         self.controlsView.hide()
     }
     
@@ -273,50 +279,6 @@ class PlayerViewController: UIViewController {
         }
         
         return nil
-        
-//        var index = subtitleIndex+1
-//        //인덱스 범위를 벗어나면 처음부터 탐색
-//        if index >= syncs.count || index < 0 {
-//            index = 0
-//        }
-//
-//        if let firstTime = syncs[index].time?.cmTime {
-//            // 현재 시각이 직전 시각보다 클 경우 (직전 시각이 마지막 인덱스)
-//            if index == syncs.count-1 {
-//                if firstTime <= time {
-//                    subtitleIndex = index
-//                    return index
-//                }
-//            } else {
-//                // 현재 시각이 직전 시각과 다음 시각 사이에 있을 경우
-//                if let secondTime = syncs[index+1].time?.cmTime {
-//                    if firstTime <= time && time < secondTime {
-//                        subtitleIndex = index
-//                        return index
-//                    }
-//                }
-//            }
-//        }
-//
-//        var preTime = CMTime.zero
-//        // 인덱스가 일치하지 않으면 처음부터 탐색
-//        for (idx, sync) in syncs.enumerated() {
-//            guard let curTime = sync.time?.cmTime else { continue }
-//
-//            if preTime <= time && time < curTime {
-//                index = idx-1
-//                break
-//            } else {
-//                preTime = curTime
-//            }
-//            // 마지막 직전까지 못찾으면 마지막으로 설정
-//            if idx == syncs.count-1 {
-//                index = idx
-//            }
-//        }
-//
-//        subtitleIndex = index
-        return index
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -328,7 +290,7 @@ class PlayerViewController: UIViewController {
         } else if (keyPath == #keyPath(AVPlayer.rate)) {
             guard let rate = change?[.newKey] as? Float else { return }
             
-            if rate > 0 {
+            if rate != 0 {
                 self.controlsView.setPlayButton(true)
             } else {
                 self.controlsView.setPlayButton(false)
@@ -424,7 +386,7 @@ extension PlayerViewController: ControlsViewDelegate {
     }
     
     func playAndPauseTouched() {
-        if player.rate > 0 {
+        if player.rate != 0 {
             player.rate = 0
         } else {
             player.rate = 1

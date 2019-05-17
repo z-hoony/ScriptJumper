@@ -16,6 +16,8 @@ class ControlsView: UIView {
     @IBOutlet private weak var emptyView: UIView!
     @IBOutlet private weak var playButton: UIButton!
     
+    static let controlsHeight: CGFloat = 50
+    
     var delegate: ControlsViewDelegate?
     
     override init(frame: CGRect) {
@@ -29,7 +31,7 @@ class ControlsView: UIView {
     }
     
     func setupUI() {
-        guard let contentView = Bundle.main.loadNibNamed("ControlsView", owner: self, options: nil)?.first as? UIView else { return }
+        guard let contentView = Bundle.main.loadNibNamed(String(describing: ControlsView.self), owner: self, options: nil)?.first as? UIView else { return }
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(contentView)
@@ -75,6 +77,10 @@ class ControlsView: UIView {
         } else {
             playButton.setTitle("재생", for: .normal)
         }
+    }
+    
+    func setSubtitleListButton(_ isEnabled: Bool) {
+        subtitleListButton.isEnabled = isEnabled
     }
     
     func hide() {

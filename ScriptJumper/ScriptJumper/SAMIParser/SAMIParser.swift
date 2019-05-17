@@ -32,8 +32,13 @@ class Tag {
 }
 
 struct SAMIParser {
-    private let ignorableOpenTags: [String] = ["font", "i", "b", "u", "small", "big", "sub", "sup", "q", "s"]
-    private var ignorableTags: [String] = ["font", "i", "b", "u", "small", "big", "sub", "sup", "q", "s", "/font", "/i", "/b", "/u", "/small", "/big", "/sub", "/sup", "/q", "/s"]
+    private static let ignorableOpenTags: [String] = ["font", "i", "b", "u", "small", "big", "sub", "sup", "q", "s"]
+    private static let ignorableTags: [String] = ["font", "i", "b", "u", "small", "big", "sub", "sup", "q", "s", "/font", "/i", "/b", "/u", "/small", "/big", "/sub", "/sup", "/q", "/s"]
+    static let syncTagString = "sync"
+    static let pTagString = "p"
+    static let brTagString = "br"
+    static let startOprionString = "start"
+    static let classOptionString = "class"
     
     func parse(_ forString: String?) -> [Tag]? {
         guard let forString = forString else { return nil }
@@ -49,12 +54,12 @@ struct SAMIParser {
             switch last.status {
             case .tag:
                 if char == ">" {
-                    if last.name.lowercased() == "br" || last.name.lowercased() == "br/" {
+                    if last.name.lowercased() == SAMIParser.brTagString || last.name.lowercased() == SAMIParser.brTagString + "/" {
                         tags.removeLast()
-                        tags.last?.content += "<br>"
+                        tags.last?.content += "<\(SAMIParser.brTagString)>"
                         tags.last?.status = .content
                         continue
-                    } else if ignorableTags.contains(last.name.lowercased()) {
+                    } else if SAMIParser.ignorableTags.contains(last.name.lowercased()) {
                         tags.removeLast()
                         tags.last?.status = .content
                         continue
@@ -79,7 +84,7 @@ struct SAMIParser {
                     optionValue = ""
                     last.status = .optionValue
                 } else if char == ">" {
-                    if ignorableOpenTags.contains(last.name.lowercased()) {
+                    if SAMIParser.ignorableOpenTags.contains(last.name.lowercased()) {
                         tags.removeLast()
                         tags.last?.status = .content
                         continue
@@ -93,7 +98,7 @@ struct SAMIParser {
                 }
             case .optionValue:
                 if char == ">" {
-                    if ignorableOpenTags.contains(last.name.lowercased()) {
+                    if SAMIParser.ignorableOpenTags.contains(last.name.lowercased()) {
                         tags.removeLast()
                         tags.last?.status = .content
                         continue
@@ -119,7 +124,7 @@ struct SAMIParser {
                 }
             case .content:
                 if char == "<" {
-                    last.content = last.content.trimmed.replacingOccurrences(of: "<br>", with: "\n")
+                    last.content = last.content.trimmed.replacingOccurrences(of: "<\(SAMIParser.brTagString)>", with: "\n")
                     last.status = .tag
                     tags.append(Tag(status: .tag))
                 } else if !char.isNewline {
@@ -168,16 +173,16 @@ extension Character {
 
 extension Array where Element == Tag {
     func toSyncs() -> [SAMISync] {
-        let tags = self.filter { $0.name.lowercased() == "sync" || $0.name.lowercased() == "p" }
+        let tags = self.filter { $0.name.lowercased() == SAMIParser.syncTagString || $0.name.lowercased() == SAMIParser.pTagString }
         var syncs = [SAMISync]()
         
         for tag in tags {
-            if tag.name.lowercased() == "sync" {
-                let time = tag.options["start"].map(Int.init)
+            if tag.name.lowercased() == SAMIParser.syncTagString {
+                let time = tag.options[SAMIParser.startOprionString].map(Int.init)
                 
                 syncs.append(SAMISync(time: SAMITime(time ?? nil), paragraphs: []))
             } else {
-                let cls = tag.options["class"]
+                let cls = tag.options[SAMIParser.classOptionString]
                 
                 let para = SAMIParagraph(class: cls, content: tag.content)
                 if syncs.count > 0 {
