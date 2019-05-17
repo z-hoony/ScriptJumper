@@ -9,18 +9,15 @@
 import UIKit
 
 class SubtitleTableViewCell: UITableViewCell {
-    @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var subtitleLabel: UILabel!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    @IBOutlet private weak var timeLabel: UILabel!
+    @IBOutlet private weak var subtitleLabel: UILabel!
+    static let identifier = "subtitleCell"
+    
+    func setTimeLabel(text: String?) {
+        timeLabel.text = text
     }
     
+    func setSubtitleLabel(text: String?) {
+        subtitleLabel.text = text
+    }
 }

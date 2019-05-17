@@ -9,17 +9,23 @@
 import Foundation
 
 struct Movie {
-    let name: String
     let url: URL
     let subtitleUrl: URL?
-    let size: UInt64?
-    let creationDate: Date?
+    
+    var name: String {
+        return url.lastPathComponent
+    }
+    
+    var size: UInt64? {
+        return try? FileManager.default.attributesOfItem(atPath: url.path)[.size] as? UInt64
+    }
+    
+    var creationDate: Date? {
+        return try? FileManager.default.attributesOfItem(atPath: url.path)[.creationDate] as? Date
+    }
     
     init(url: URL, subtitleUrl: URL?) {
         self.url = url
         self.subtitleUrl = subtitleUrl
-        self.name = url.lastPathComponent
-        self.size = try? FileManager.default.attributesOfItem(atPath: url.path)[.size] as? UInt64
-        self.creationDate = try? FileManager.default.attributesOfItem(atPath: url.path)[.creationDate] as? Date
     }
 }

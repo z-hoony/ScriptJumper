@@ -9,9 +9,8 @@
 import UIKit
 
 class SubtitleView: UIView {
-    @IBOutlet private var contentView: UIView!
     @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet private weak var searchBar: UISearchBar!
     
     var delegate: (SubtitleViewDelegate & UITableViewDelegate & UITableViewDataSource)? {
         didSet {
@@ -31,7 +30,7 @@ class SubtitleView: UIView {
     }
     
     func setupUI() {
-        Bundle.main.loadNibNamed("SubtitleView", owner: self, options: nil)
+        guard let contentView = Bundle.main.loadNibNamed(String(describing: SubtitleView.self), owner: self, options: nil)?.first as? UIView else { return }
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(contentView)
@@ -43,14 +42,14 @@ class SubtitleView: UIView {
             contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
             ])
         
-        let cellNib = UINib(nibName: "SubtitleTableViewCell", bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: "subtitleCell")
+        let cellNib = UINib(nibName: String(describing: SubtitleTableViewCell.self), bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: SubtitleTableViewCell.identifier)
         
         searchBar.delegate = self
     }
     
     @IBAction func close() {
-        delegate?.subtitleCloseButtonClicked()
+        delegate?.subtitleCloseButtonTouched()
     }
     
     func hide() {
@@ -65,10 +64,16 @@ class SubtitleView: UIView {
     func reloadData() {
         self.tableView.reloadData()
     }
+    
+    func scrollToRow(at indexPath: IndexPath) {
+        if !self.tableView.isDragging {
+            self.tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+        }
+    }
 }
 
 protocol SubtitleViewDelegate {
-    func subtitleCloseButtonClicked()
+    func subtitleCloseButtonTouched()
     func searchBar(textDidChange searchText: String)
 }
 

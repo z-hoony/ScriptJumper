@@ -180,7 +180,9 @@ extension Array where Element == Tag {
                 let cls = tag.options["class"]
                 
                 let para = SAMIParagraph(class: cls, content: tag.content)
-                syncs[syncs.count-1].paragraphs.append(para)
+                if syncs.count > 0 {
+                    syncs[syncs.count-1].paragraphs.append(para)
+                }
             }
         }
         syncs.removeFirst()

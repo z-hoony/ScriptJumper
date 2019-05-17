@@ -12,7 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SubtitleView" customModule="ScriptJumper" customModuleProvider="target">
             <connections>
-                <outlet property="contentView" destination="iN0-l3-epB" id="qIK-dq-djU"/>
                 <outlet property="searchBar" destination="vUh-uV-KXe" id="imO-1D-JFB"/>
                 <outlet property="tableView" destination="bdO-Ce-T4e" id="xFf-MW-l9L"/>
             </connections>

@@ -20,10 +20,10 @@ class MovieListViewController: UIViewController {
     }
     
     func setupUI() {
-        let cellNib = UINib(nibName: "MovieTableViewCell", bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: "movieCell")
+        let cellNib = UINib(nibName: String(describing: MovieTableViewCell.self), bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: MovieTableViewCell.identifier)
         
-        self.navigationController?.title = "영화 목록"
+        self.navigationController?.navigationItem.title = "영화 목록"
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
@@ -46,21 +46,23 @@ extension MovieListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "movieCell", for: indexPath) as! MovieTableViewCell
+        let dequeueCell = tableView.dequeueReusableCell(withIdentifier: MovieTableViewCell.identifier, for: indexPath)
+        guard let cell = dequeueCell as? MovieTableViewCell else { return dequeueCell}
+        
         guard (movies?.count ?? 0) > indexPath.row else { return cell }
         guard let movie = movies?[indexPath.row] else { return cell }
         
-        cell.fileNameLabel.text = movie.name
-        cell.subtitleExistLabel.text = movie.subtitleUrl != nil ? "자막 있음" : "자막 없음"
+        cell.setFileNameLabel(text: movie.name)
+        cell.setSubtitleExistLabel(text: movie.subtitleUrl != nil ? "자막 있음" : "자막 없음")
         
         guard let date = movie.creationDate else { return cell }
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale.current
         dateFormatter.dateFormat = "yyyy. MM. dd. HH:mm:ss"
-        cell.fileCreationTimeLabel.text = dateFormatter.string(from: date)
+        cell.setFileCreationTimeLabel(text: dateFormatter.string(from: date))
         
         guard let size = movie.size else { return cell }
-        cell.fileSizeLabel.text = ByteCountFormatter.string(fromByteCount: Int64(size), countStyle: .binary)
+        cell.setFileSizeLabel(text: ByteCountFormatter.string(fromByteCount: Int64(size), countStyle: .binary))
 
         return cell
     }
@@ -77,7 +79,7 @@ extension MovieListViewController: UITableViewDelegate {
         
         let viewContoller = PlayerViewController()
         viewContoller.movie = movie
-        present(viewContoller, animated: true, completion: nil)
         
+        present(viewContoller, animated: true, completion: nil)
     }
 }

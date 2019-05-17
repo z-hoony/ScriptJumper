@@ -9,20 +9,26 @@
 import UIKit
 
 class MovieTableViewCell: UITableViewCell {
-    @IBOutlet weak var fileNameLabel: UILabel!
-    @IBOutlet weak var fileSizeLabel: UILabel!
-    @IBOutlet weak var fileCreationTimeLabel: UILabel!
-    @IBOutlet weak var subtitleExistLabel: UILabel!
+    @IBOutlet private weak var fileNameLabel: UILabel!
+    @IBOutlet private weak var fileSizeLabel: UILabel!
+    @IBOutlet private weak var fileCreationTimeLabel: UILabel!
+    @IBOutlet private weak var subtitleExistLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    static let identifier = "movieCell"
+    
+    func setFileNameLabel(text: String?) {
+        fileNameLabel.text = text
     }
     
+    func setFileSizeLabel(text: String?) {
+        fileSizeLabel.text = text
+    }
+    
+    func setFileCreationTimeLabel(text: String?) {
+        fileCreationTimeLabel.text = text
+    }
+    
+    func setSubtitleExistLabel(text: String?) {
+        subtitleExistLabel.text = text
+    }
 }

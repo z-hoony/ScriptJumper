@@ -19,12 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = UINavigationController(rootViewController: MovieListViewController())
         window?.makeKeyAndVisible()
         
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback)
-        } catch {
-            print("세선 카테고리 설정 실패")
-        }
-        
         return true
     }
 }

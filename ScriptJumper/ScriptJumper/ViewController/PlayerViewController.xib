@@ -12,8 +12,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlayerViewController" customModule="ScriptJumper" customModuleProvider="target">
             <connections>
+                <outlet property="controlsView" destination="v5J-dM-26S" id="W1u-FP-8VH"/>
                 <outlet property="playerView" destination="ody-5N-Dz5" id="iPh-pA-zRO"/>
                 <outlet property="subtitleLabel" destination="IEY-Dy-klT" id="k4q-ik-Kqu"/>
+                <outlet property="subtitleLabelBottomAnchor" destination="IQv-sb-rnK" id="Qva-08-7vc"/>
+                <outlet property="subtitleLabelCenterXAnchor" destination="HG6-6q-T6z" id="1jQ-D4-LKR"/>
                 <outlet property="subtitleView" destination="58S-z5-poc" id="mfv-lL-Ua0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -28,12 +31,16 @@
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IEY-Dy-klT" customClass="SubtitleLabel" customModule="ScriptJumper" customModuleProvider="target">
-                    <rect key="frame" x="207" y="832" width="0.0" height="0.0"/>
-                    <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.70446275684931503" colorSpace="custom" customColorSpace="sRGB"/>
+                    <rect key="frame" x="207" y="846" width="0.0" height="0.0"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5J-dM-26S" customClass="ControlsView" customModule="ScriptJumper" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="58S-z5-poc" customClass="SubtitleView" customModule="ScriptJumper" customModuleProvider="target">
                     <rect key="frame" x="194" y="0.0" width="220" height="896"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -44,17 +51,21 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="v5J-dM-26S" secondAttribute="trailing" id="0NE-QO-wga"/>
                 <constraint firstAttribute="bottom" secondItem="58S-z5-poc" secondAttribute="bottom" id="34c-us-cD4"/>
+                <constraint firstAttribute="bottom" secondItem="v5J-dM-26S" secondAttribute="bottom" id="9wN-SY-XZN"/>
                 <constraint firstItem="ody-5N-Dz5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="D7U-W5-6da"/>
                 <constraint firstItem="58S-z5-poc" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="GsH-WI-Il7"/>
-                <constraint firstItem="IEY-Dy-klT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="HG6-6q-T6z"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="IEY-Dy-klT" secondAttribute="bottom" constant="30" id="IQv-sb-rnK"/>
+                <constraint firstItem="IEY-Dy-klT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" priority="750" id="HG6-6q-T6z"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="IEY-Dy-klT" secondAttribute="bottom" constant="16" id="IQv-sb-rnK"/>
                 <constraint firstItem="ody-5N-Dz5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="JoT-oK-hX6"/>
                 <constraint firstAttribute="trailing" secondItem="ody-5N-Dz5" secondAttribute="trailing" id="QqR-gb-AXb"/>
+                <constraint firstItem="v5J-dM-26S" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="RTw-kw-v2z"/>
                 <constraint firstAttribute="trailing" secondItem="58S-z5-poc" secondAttribute="trailing" id="VQj-yg-LII"/>
                 <constraint firstItem="IEY-Dy-klT" firstAttribute="width" relation="lessThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="width" constant="-32" id="YsG-sV-vrg"/>
                 <constraint firstAttribute="bottom" secondItem="ody-5N-Dz5" secondAttribute="bottom" id="gH2-Ai-RxC"/>
                 <constraint firstItem="58S-z5-poc" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="2:5" priority="750" id="iJt-4f-Yuw"/>
+                <constraint firstItem="v5J-dM-26S" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="pUz-CM-bIy"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>
