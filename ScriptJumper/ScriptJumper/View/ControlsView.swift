@@ -9,6 +9,7 @@
 import UIKit
 
 class ControlsView: UIView {
+    @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var subtitleListButton: UIButton!
     @IBOutlet private weak var currentTimeLabel: UILabel!
     @IBOutlet private weak var timeSlider: UISlider!
@@ -63,6 +64,10 @@ class ControlsView: UIView {
         self.timeSlider.maximumValue = value
     }
     
+    func getSliderIsTracking() -> Bool {
+        return self.timeSlider.isTracking
+    }
+    
     func setCurrentTime(_ text: String?) {
         self.currentTimeLabel.text = text
     }
@@ -81,6 +86,10 @@ class ControlsView: UIView {
     
     func setSubtitleListButton(_ isEnabled: Bool) {
         subtitleListButton.isEnabled = isEnabled
+    }
+    
+    func setTitle(_ text: String?) {
+        self.titleLabel.text = text
     }
     
     func hide() {

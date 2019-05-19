@@ -17,6 +17,10 @@ class PlayerViewController: UIViewController {
     @IBOutlet private weak var subtitleLabelBottomAnchor: NSLayoutConstraint!
     @IBOutlet private weak var subtitleLabelCenterXAnchor: NSLayoutConstraint!
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     static let nonBreakSpace: String = "&nbsp;"
     static let subtitleLabelCornerRadius: CGFloat = 4
     static let subtitleLabelBottomMargin: CGFloat = 16
@@ -74,12 +78,35 @@ class PlayerViewController: UIViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
         try? AVAudioSession.sharedInstance().setActive(false, options: [.notifyOthersOnDeactivation])
     }
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
         if subtitleLabelCenterXAnchor.constant != 0 {
             subtitleLabelCenterXAnchor.constant = -self.subtitleView.bounds.width/2
+        }
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == #keyPath(AVPlayerItem.duration) {
+            guard let duration = change?[.newKey] as? CMTime else { return }
+            
+            self.controlsView.setTimeSliderMaximum(Float(duration.samiTime.time))
+            self.controlsView.setDuration(duration.samiTime.simpleDescription)
+        } else if (keyPath == #keyPath(AVPlayer.rate)) {
+            guard let rate = change?[.newKey] as? Float else { return }
+            
+            if rate != 0 {
+                self.controlsView.setPlayButton(true)
+            } else {
+                self.controlsView.setPlayButton(false)
+            }
+        } else {
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
     
@@ -100,6 +127,8 @@ class PlayerViewController: UIViewController {
         
         subtitleLabel.layer.cornerRadius = PlayerViewController.subtitleLabelCornerRadius
         subtitleLabel.clipsToBounds = true
+        
+        controlsView.setTitle(movie?.name)
         
         if movie?.subtitleUrl == nil {
             self.controlsView.setSubtitleListButton(false)
@@ -190,8 +219,11 @@ class PlayerViewController: UIViewController {
     func addPeriodicTimeObserver() {
         let time = CMTime(value: 500, timescale: CMTimeScale(SAMITime.timescale))
         periodicTimeObserverToken = player.addPeriodicTimeObserver(forInterval: time, queue: .main) { [weak self] time in
-            self?.controlsView.setTimeSlider(Float(time.samiTime.time))
             self?.controlsView.setCurrentTime(time.samiTime.simpleDescription)
+            
+            if self?.controlsView.getSliderIsTracking() == false {
+                self?.controlsView.setTimeSlider(Float(time.samiTime.time))
+            }
         }
     }
     
@@ -279,23 +311,6 @@ class PlayerViewController: UIViewController {
         }
         
         return nil
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == #keyPath(AVPlayerItem.duration) {
-            guard let duration = change?[.newKey] as? CMTime else { return }
-            
-            self.controlsView.setTimeSliderMaximum(Float(duration.samiTime.time))
-            self.controlsView.setDuration(duration.samiTime.simpleDescription)
-        } else if (keyPath == #keyPath(AVPlayer.rate)) {
-            guard let rate = change?[.newKey] as? Float else { return }
-            
-            if rate != 0 {
-                self.controlsView.setPlayButton(true)
-            } else {
-                self.controlsView.setPlayButton(false)
-            }
-        }
     }
     
     deinit {

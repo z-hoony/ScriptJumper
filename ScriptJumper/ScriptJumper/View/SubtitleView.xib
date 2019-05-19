@@ -71,11 +71,11 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="9w8-Rg-fgG" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="2iD-og-j9h"/>
-                <constraint firstItem="bdO-Ce-T4e" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="FdX-ue-uen"/>
+                <constraint firstItem="bdO-Ce-T4e" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="FdX-ue-uen"/>
                 <constraint firstItem="8FP-Wm-R1T" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="K1F-xO-W4o"/>
                 <constraint firstItem="bdO-Ce-T4e" firstAttribute="top" secondItem="9w8-Rg-fgG" secondAttribute="bottom" id="KdX-XZ-Qom"/>
-                <constraint firstItem="bdO-Ce-T4e" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="LBk-Gf-uZ9"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="bdO-Ce-T4e" secondAttribute="bottom" id="V3E-nj-6UE"/>
+                <constraint firstItem="bdO-Ce-T4e" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="LBk-Gf-uZ9"/>
+                <constraint firstAttribute="bottom" secondItem="bdO-Ce-T4e" secondAttribute="bottom" constant="34" id="V3E-nj-6UE"/>
                 <constraint firstItem="9w8-Rg-fgG" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="YAo-Fa-M4Q"/>
                 <constraint firstItem="9w8-Rg-fgG" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="n30-cg-Uyi"/>
                 <constraint firstAttribute="trailing" secondItem="8FP-Wm-R1T" secondAttribute="trailing" id="s7d-45-ofZ"/>

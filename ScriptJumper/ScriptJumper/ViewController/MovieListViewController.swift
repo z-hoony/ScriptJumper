@@ -80,6 +80,7 @@ extension MovieListViewController: UITableViewDelegate {
         let viewContoller = PlayerViewController()
         viewContoller.movie = movie
         
+        
         present(viewContoller, animated: true, completion: nil)
     }
 }
