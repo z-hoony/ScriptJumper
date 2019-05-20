@@ -29,6 +29,10 @@ class PlayerViewController: UIViewController {
         return false
     }
     
+    override var prefersHomeIndicatorAutoHidden: Bool {
+        return true
+    }
+    
     static let nonBreakSpace: String = "&nbsp;"
     static let subtitleLabelCornerRadius: CGFloat = 4
     static let subtitleLabelBottomMargin: CGFloat = 16
