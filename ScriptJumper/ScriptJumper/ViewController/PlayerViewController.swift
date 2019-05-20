@@ -22,6 +22,13 @@ class PlayerViewController: UIViewController {
         return .lightContent
     }
     
+    override var prefersStatusBarHidden: Bool {
+        if self.controlsView.getIsHidden() {
+            return true
+        }
+        return false
+    }
+    
     static let nonBreakSpace: String = "&nbsp;"
     static let subtitleLabelCornerRadius: CGFloat = 4
     static let subtitleLabelBottomMargin: CGFloat = 16
@@ -202,11 +209,13 @@ class PlayerViewController: UIViewController {
     func controlsShow() {
         subtitleLabelBottomAnchor.constant = PlayerViewController.subtitleLabelBottomMargin + ControlsView.controlsHeight
         self.controlsView.show()
+        self.setNeedsStatusBarAppearanceUpdate()
     }
     
     func controlsHide() {
         subtitleLabelBottomAnchor.constant = PlayerViewController.subtitleLabelBottomMargin
         self.controlsView.hide()
+        self.setNeedsStatusBarAppearanceUpdate()
     }
     
     func subtitleViewShow() {

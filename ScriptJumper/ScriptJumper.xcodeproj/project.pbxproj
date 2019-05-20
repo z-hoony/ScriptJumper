@@ -26,8 +26,8 @@
 		F98577DF228CE5C700451841 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98577DE228CE5C700451841 /* ControlsView.swift */; };
 		F98577E1228CE5D400451841 /* ControlsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F98577E0228CE5D400451841 /* ControlsView.xib */; };
 		F98577E3228CEE7100451841 /* SubtitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98577E2228CEE7100451841 /* SubtitleLabel.swift */; };
-		F98577E6228D62C700451841 /* Oceans.Thirteen.2007.1080p.BluRay.H264.AAC-RARBG.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F98577E4228D62C700451841 /* Oceans.Thirteen.2007.1080p.BluRay.H264.AAC-RARBG.mp4 */; };
-		F98577E7228D62C700451841 /* Oceans.Thirteen.2007.1080p.BluRay.H264.AAC-RARBG.smi in Resources */ = {isa = PBXBuildFile; fileRef = F98577E5228D62C700451841 /* Oceans.Thirteen.2007.1080p.BluRay.H264.AAC-RARBG.smi */; };
+		F9F57B932292B59B00635231 /* Oceans.Thirteen.2007.1080p.BluRay.H264.AAC-RARBG.smi in Resources */ = {isa = PBXBuildFile; fileRef = F9F57B902292B51A00635231 /* Oceans.Thirteen.2007.1080p.BluRay.H264.AAC-RARBG.smi */; };
+		F9F57B942292B59B00635231 /* Oceans.Thirteen.2007.1080p.BluRay.H264.AAC-RARBG.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F9F57B912292B59B00635231 /* Oceans.Thirteen.2007.1080p.BluRay.H264.AAC-RARBG.mp4 */; };
 		F9FECAB222845F9100241E33 /* SAMISync.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FECAB122845F9100241E33 /* SAMISync.swift */; };
 		F9FECAB522845FC600241E33 /* SAMITime.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FECAB422845FC600241E33 /* SAMITime.swift */; };
 		F9FECAB722845FEA00241E33 /* SAMIParagraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FECAB622845FEA00241E33 /* SAMIParagraph.swift */; };
@@ -55,8 +55,8 @@
 		F98577DE228CE5C700451841 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
 		F98577E0228CE5D400451841 /* ControlsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ControlsView.xib; sourceTree = "<group>"; };
 		F98577E2228CEE7100451841 /* SubtitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleLabel.swift; sourceTree = "<group>"; };
-		F98577E4228D62C700451841 /* Oceans.Thirteen.2007.1080p.BluRay.H264.AAC-RARBG.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oceans.Thirteen.2007.1080p.BluRay.H264.AAC-RARBG.mp4"; sourceTree = "<group>"; };
-		F98577E5228D62C700451841 /* Oceans.Thirteen.2007.1080p.BluRay.H264.AAC-RARBG.smi */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Oceans.Thirteen.2007.1080p.BluRay.H264.AAC-RARBG.smi"; sourceTree = "<group>"; };
+		F9F57B902292B51A00635231 /* Oceans.Thirteen.2007.1080p.BluRay.H264.AAC-RARBG.smi */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Oceans.Thirteen.2007.1080p.BluRay.H264.AAC-RARBG.smi"; sourceTree = "<group>"; };
+		F9F57B912292B59B00635231 /* Oceans.Thirteen.2007.1080p.BluRay.H264.AAC-RARBG.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oceans.Thirteen.2007.1080p.BluRay.H264.AAC-RARBG.mp4"; sourceTree = "<group>"; };
 		F9FECAB122845F9100241E33 /* SAMISync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAMISync.swift; sourceTree = "<group>"; };
 		F9FECAB422845FC600241E33 /* SAMITime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAMITime.swift; sourceTree = "<group>"; };
 		F9FECAB622845FEA00241E33 /* SAMIParagraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAMIParagraph.swift; sourceTree = "<group>"; };
@@ -92,11 +92,11 @@
 		F96768F6228452AA005AD24D /* ScriptJumper */ = {
 			isa = PBXGroup;
 			children = (
+				F9F57B8F2292B4FE00635231 /* Resource */,
 				F98577CF228C66E900451841 /* Model */,
 				F9D53151228A5FF5002047EF /* ViewController */,
 				F98577C2228C59AF00451841 /* View */,
 				F98577C8228C63CD00451841 /* Cell */,
-				F9FECABA228524A300241E33 /* Files */,
 				F9FECAB322845F9700241E33 /* SAMIParser */,
 				F96768F7228452AA005AD24D /* AppDelegate.swift */,
 				F96768FE228452AB005AD24D /* Assets.xcassets */,
@@ -150,6 +150,15 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		F9F57B8F2292B4FE00635231 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				F9F57B912292B59B00635231 /* Oceans.Thirteen.2007.1080p.BluRay.H264.AAC-RARBG.mp4 */,
+				F9F57B902292B51A00635231 /* Oceans.Thirteen.2007.1080p.BluRay.H264.AAC-RARBG.smi */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		F9FECAB322845F9700241E33 /* SAMIParser */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,15 +168,6 @@
 				F9FECAB622845FEA00241E33 /* SAMIParagraph.swift */,
 			);
 			path = SAMIParser;
-			sourceTree = "<group>";
-		};
-		F9FECABA228524A300241E33 /* Files */ = {
-			isa = PBXGroup;
-			children = (
-				F98577E4228D62C700451841 /* Oceans.Thirteen.2007.1080p.BluRay.H264.AAC-RARBG.mp4 */,
-				F98577E5228D62C700451841 /* Oceans.Thirteen.2007.1080p.BluRay.H264.AAC-RARBG.smi */,
-			);
-			path = Files;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,15 +228,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F98577E7228D62C700451841 /* Oceans.Thirteen.2007.1080p.BluRay.H264.AAC-RARBG.smi in Resources */,
+				F9F57B932292B59B00635231 /* Oceans.Thirteen.2007.1080p.BluRay.H264.AAC-RARBG.smi in Resources */,
 				F9676902228452AB005AD24D /* LaunchScreen.storyboard in Resources */,
 				F98577D3228C6BC300451841 /* SubtitleTableViewCell.xib in Resources */,
 				F98577D7228C722100451841 /* PlayerViewController.xib in Resources */,
 				F98577DD228C7BF800451841 /* SubtitleView.xib in Resources */,
 				F98577CC228C63F600451841 /* MovieTableViewCell.xib in Resources */,
-				F98577E6228D62C700451841 /* Oceans.Thirteen.2007.1080p.BluRay.H264.AAC-RARBG.mp4 in Resources */,
 				F96768FF228452AB005AD24D /* Assets.xcassets in Resources */,
 				F98577E1228CE5D400451841 /* ControlsView.xib in Resources */,
+				F9F57B942292B59B00635231 /* Oceans.Thirteen.2007.1080p.BluRay.H264.AAC-RARBG.mp4 in Resources */,
 				F98577C6228C633300451841 /* MovieListViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

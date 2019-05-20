@@ -100,6 +100,10 @@ class ControlsView: UIView {
         self.isHidden = false
     }
     
+    func getIsHidden() -> Bool {
+        return self.isHidden
+    }
+    
     @objc func singleTap() {
         delegate?.singleTap()
     }
