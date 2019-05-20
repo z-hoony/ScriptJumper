@@ -17,6 +17,7 @@
                 <outlet property="subtitleLabel" destination="IEY-Dy-klT" id="k4q-ik-Kqu"/>
                 <outlet property="subtitleLabelBottomAnchor" destination="IQv-sb-rnK" id="Qva-08-7vc"/>
                 <outlet property="subtitleLabelCenterXAnchor" destination="HG6-6q-T6z" id="1jQ-D4-LKR"/>
+                <outlet property="subtitleLabelWidthAnchor" destination="YsG-sV-vrg" id="9lg-00-Wxm"/>
                 <outlet property="subtitleView" destination="58S-z5-poc" id="mfv-lL-Ua0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -30,7 +31,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IEY-Dy-klT" customClass="SubtitleLabel" customModule="ScriptJumper" customModuleProvider="target">
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IEY-Dy-klT" customClass="SubtitleLabel" customModule="ScriptJumper" customModuleProvider="target">
                     <rect key="frame" x="207" y="846" width="0.0" height="0.0"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>

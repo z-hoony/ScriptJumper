@@ -59,8 +59,9 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bdO-Ce-T4e">
-                    <rect key="frame" x="0.0" y="94" width="407" height="712"/>
+                    <rect key="frame" x="0.0" y="94" width="407" height="746"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="separatorColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="자막 및 시각 검색" id="vUh-uV-KXe">
                         <rect key="frame" x="0.0" y="0.0" width="407" height="44"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -75,7 +76,7 @@
                 <constraint firstItem="8FP-Wm-R1T" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="K1F-xO-W4o"/>
                 <constraint firstItem="bdO-Ce-T4e" firstAttribute="top" secondItem="9w8-Rg-fgG" secondAttribute="bottom" id="KdX-XZ-Qom"/>
                 <constraint firstItem="bdO-Ce-T4e" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="LBk-Gf-uZ9"/>
-                <constraint firstAttribute="bottom" secondItem="bdO-Ce-T4e" secondAttribute="bottom" constant="34" id="V3E-nj-6UE"/>
+                <constraint firstAttribute="bottom" secondItem="bdO-Ce-T4e" secondAttribute="bottom" id="V3E-nj-6UE"/>
                 <constraint firstItem="9w8-Rg-fgG" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="YAo-Fa-M4Q"/>
                 <constraint firstItem="9w8-Rg-fgG" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="n30-cg-Uyi"/>
                 <constraint firstAttribute="trailing" secondItem="8FP-Wm-R1T" secondAttribute="trailing" id="s7d-45-ofZ"/>

@@ -16,6 +16,7 @@ class PlayerViewController: UIViewController {
     @IBOutlet private weak var controlsView: ControlsView!
     @IBOutlet private weak var subtitleLabelBottomAnchor: NSLayoutConstraint!
     @IBOutlet private weak var subtitleLabelCenterXAnchor: NSLayoutConstraint!
+    @IBOutlet private weak var subtitleLabelWidthAnchor: NSLayoutConstraint!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -24,6 +25,7 @@ class PlayerViewController: UIViewController {
     static let nonBreakSpace: String = "&nbsp;"
     static let subtitleLabelCornerRadius: CGFloat = 4
     static let subtitleLabelBottomMargin: CGFloat = 16
+    static let subtitleLabelHorizontalMargin: CGFloat = 32
     
     private var doubleTapGestureRecognizer: UITapGestureRecognizer!
     private var singleTapGestureRecognizer: UITapGestureRecognizer!
@@ -88,6 +90,7 @@ class PlayerViewController: UIViewController {
         
         if subtitleLabelCenterXAnchor.constant != 0 {
             subtitleLabelCenterXAnchor.constant = -self.subtitleView.bounds.width/2
+            subtitleLabelWidthAnchor.constant = -PlayerViewController.subtitleLabelHorizontalMargin - self.subtitleView.bounds.width
         }
     }
     
@@ -208,11 +211,13 @@ class PlayerViewController: UIViewController {
     
     func subtitleViewShow() {
         subtitleLabelCenterXAnchor.constant = -self.subtitleView.bounds.width/2
+        subtitleLabelWidthAnchor.constant = -PlayerViewController.subtitleLabelHorizontalMargin - self.subtitleView.bounds.width
         self.subtitleView.show()
     }
     
     func subtitleViewHide() {
         subtitleLabelCenterXAnchor.constant = 0
+        subtitleLabelWidthAnchor.constant = -PlayerViewController.subtitleLabelHorizontalMargin
         self.subtitleView.hide()
     }
     
@@ -352,10 +357,6 @@ extension PlayerViewController: UITableViewDataSource {
         guard let cell = dequeueCell as? SubtitleTableViewCell else {
             return dequeueCell
         }
-        
-        let selectedView = UIView()
-        selectedView.backgroundColor = UIColor.white.withAlphaComponent(0.2)
-        cell.selectedBackgroundView = selectedView
         
         guard indexPath.row < (self.filteredSyncs?.count ?? 0) else { return cell }
         
