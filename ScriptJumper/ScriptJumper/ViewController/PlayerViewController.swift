@@ -166,10 +166,11 @@ class PlayerViewController: UIViewController {
     }
     
     func loadSyncs(_ url: URL?) {
-        let content = fileRead(url)
-        let parser = SAMIParser()
-        
         DispatchQueue.global(qos: .background).async { [weak self] in
+            guard let url = url else { return }
+            
+            let content = try? String(contentsOf: url, encoding: .utf8)
+            let parser = SAMIParser()
             let tags = parser.parse(content)
             //원본 자막
             self?.syncs = tags?
@@ -186,12 +187,6 @@ class PlayerViewController: UIViewController {
                 self?.addBoundaryTimeObserver()
             }
         }
-    }
-    
-    func fileRead(_ url: URL?, encoding: String.Encoding = .utf8) -> String? {
-        guard let url = url else { return nil }
-        
-        return try? String(contentsOf: url, encoding: encoding)
     }
     
     @objc func doubleTap() {

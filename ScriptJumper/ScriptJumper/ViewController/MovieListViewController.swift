@@ -29,14 +29,18 @@ class MovieListViewController: UIViewController {
     }
     
     func loadBundleFiles() {
-        movies = Bundle.main.urls(forResourcesWithExtension: "mp4", subdirectory: nil)?
-            .map {
-                let fileName = $0.deletingPathExtension().lastPathComponent
-                let subtitleURL = Bundle.main.url(forResource: fileName, withExtension: "smi")
-                return Movie(url: $0, subtitleUrl: subtitleURL)
+        DispatchQueue.global().async { [weak self] in
+            self?.movies = Bundle.main.urls(forResourcesWithExtension: "mp4", subdirectory: nil)?
+                .map {
+                    let fileName = $0.deletingPathExtension().lastPathComponent
+                    let subtitleURL = Bundle.main.url(forResource: fileName, withExtension: "smi")
+                    return Movie(url: $0, subtitleUrl: subtitleURL)
+            }
+            
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.reloadData()
+            }
         }
-        
-        self.tableView.reloadData()
     }
 }
 
