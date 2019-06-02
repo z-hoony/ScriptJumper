@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3343E699439EEF75C96A3936 /* Pods_ScriptJumper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 091C24BC689C0C5E2172DCD9 /* Pods_ScriptJumper.framework */; };
 		F96768F8228452AA005AD24D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96768F7228452AA005AD24D /* AppDelegate.swift */; };
 		F96768FF228452AB005AD24D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F96768FE228452AB005AD24D /* Assets.xcassets */; };
 		F9676902228452AB005AD24D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9676900228452AB005AD24D /* LaunchScreen.storyboard */; };
@@ -34,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		091C24BC689C0C5E2172DCD9 /* Pods_ScriptJumper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScriptJumper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4245131B5A95F3970733381 /* Pods-ScriptJumper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScriptJumper.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScriptJumper/Pods-ScriptJumper.release.xcconfig"; sourceTree = "<group>"; };
 		F96768F4228452AA005AD24D /* ScriptJumper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScriptJumper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F96768F7228452AA005AD24D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F96768FE228452AB005AD24D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -60,6 +63,7 @@
 		F9FECAB122845F9100241E33 /* SAMISync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAMISync.swift; sourceTree = "<group>"; };
 		F9FECAB422845FC600241E33 /* SAMITime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAMITime.swift; sourceTree = "<group>"; };
 		F9FECAB622845FEA00241E33 /* SAMIParagraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAMIParagraph.swift; sourceTree = "<group>"; };
+		FC7DBDECB1D9552A48738539 /* Pods-ScriptJumper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScriptJumper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScriptJumper/Pods-ScriptJumper.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,17 +71,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3343E699439EEF75C96A3936 /* Pods_ScriptJumper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2EFE1B6F1CA6150120CFC476 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				091C24BC689C0C5E2172DCD9 /* Pods_ScriptJumper.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7441FBAFDA230556D3EFDA5F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FC7DBDECB1D9552A48738539 /* Pods-ScriptJumper.debug.xcconfig */,
+				E4245131B5A95F3970733381 /* Pods-ScriptJumper.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		F96768EB228452AA005AD24D = {
 			isa = PBXGroup;
 			children = (
 				F96768F6228452AA005AD24D /* ScriptJumper */,
 				F96768F5228452AA005AD24D /* Products */,
+				7441FBAFDA230556D3EFDA5F /* Pods */,
+				2EFE1B6F1CA6150120CFC476 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -177,9 +201,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F9676906228452AB005AD24D /* Build configuration list for PBXNativeTarget "ScriptJumper" */;
 			buildPhases = (
+				04339C2C0A3B7978725E363E /* [CP] Check Pods Manifest.lock */,
 				F96768F0228452AA005AD24D /* Sources */,
 				F96768F1228452AA005AD24D /* Frameworks */,
 				F96768F2228452AA005AD24D /* Resources */,
+				F924E16622A38444009FBEC2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -242,6 +268,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		04339C2C0A3B7978725E363E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ScriptJumper-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F924E16622A38444009FBEC2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F96768F0228452AA005AD24D /* Sources */ = {
@@ -397,12 +465,13 @@
 		};
 		F9676907228452AB005AD24D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FC7DBDECB1D9552A48738539 /* Pods-ScriptJumper.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QEK6L29J65;
 				INFOPLIST_FILE = ScriptJumper/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -416,12 +485,13 @@
 		};
 		F9676908228452AB005AD24D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E4245131B5A95F3970733381 /* Pods-ScriptJumper.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QEK6L29J65;
 				INFOPLIST_FILE = ScriptJumper/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -11,7 +11,7 @@ import Foundation
 struct SAMIParagraph: CustomStringConvertible {
     let `class`: String?
     let content: String
-    
+
     var description: String {
         guard let cls = self.class else { return self.content }
         return "[\(cls)]\n\(self.content)"

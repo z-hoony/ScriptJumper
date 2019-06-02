@@ -11,12 +11,15 @@ import UIKit
 class SubtitleLabel: UILabel {
     static let horizontalPadding: CGFloat = 8
     static let verticalPadding: CGFloat = 4
-    
+
     override func drawText(in rect: CGRect) {
-        let insets = UIEdgeInsets(top: SubtitleLabel.verticalPadding, left: SubtitleLabel.horizontalPadding, bottom: SubtitleLabel.verticalPadding, right: SubtitleLabel.horizontalPadding)
+        let insets = UIEdgeInsets(top: SubtitleLabel.verticalPadding,
+                                  left: SubtitleLabel.horizontalPadding,
+                                  bottom: SubtitleLabel.verticalPadding,
+                                  right: SubtitleLabel.horizontalPadding)
         super.drawText(in: rect.inset(by: insets))
     }
-    
+
     override var intrinsicContentSize: CGSize {
         var size = super.intrinsicContentSize
         size.width += SubtitleLabel.horizontalPadding * 2

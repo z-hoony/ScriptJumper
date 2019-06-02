@@ -20,9 +20,9 @@ enum Status {
 class Tag {
     var status: Status
     var name: String
-    var options: [String:String]
+    var options: [String: String]
     var content: String
-    
+
     init(status: Status = .ready) {
         self.status = status
         self.name = ""
@@ -33,129 +33,146 @@ class Tag {
 
 struct SAMIParser {
     private static let ignorableOpenTags: [String] = ["font", "i", "b", "u", "small", "big", "sub", "sup", "q", "s"]
-    private static let ignorableTags: [String] = ["font", "i", "b", "u", "small", "big", "sub", "sup", "q", "s", "/font", "/i", "/b", "/u", "/small", "/big", "/sub", "/sup", "/q", "/s"]
+    private static let ignorableTags: [String] = ["font", "i", "b", "u", "small", "big", "sub",
+                                                  "sup", "q", "s", "/font", "/i", "/b", "/u",
+                                                  "/small", "/big", "/sub", "/sup", "/q", "/s"]
     static let syncTagString = "sync"
     static let pTagString = "p"
     static let brTagString = "br"
     static let startOprionString = "start"
     static let classOptionString = "class"
-    
-    func parse(_ forString: String?) -> [Tag]? {
+
+    private var optionName = ""
+    private var preOptionName = ""
+    private var optionValue = ""
+    private var tags = [Tag(status: .ready)]
+
+    mutating func parse(_ forString: String?) -> [Tag]? {
         guard let forString = forString else { return nil }
-        
-        var optionName = ""
-        var preOptionName = ""
-        var optionValue = ""
-        var tags = [Tag(status: .ready)]
-        
+
         for char in forString {
             guard let last = tags.last else { return nil }
-            
+
             switch last.status {
             case .tag:
-                if char == ">" {
-                    if last.name.lowercased() == SAMIParser.brTagString || last.name.lowercased() == SAMIParser.brTagString + "/" {
-                        tags.removeLast()
-                        tags.last?.content += "<\(SAMIParser.brTagString)>"
-                        tags.last?.status = .content
-                        continue
-                    } else if SAMIParser.ignorableTags.contains(last.name.lowercased()) {
-                        tags.removeLast()
-                        tags.last?.status = .content
-                        continue
-                    } else if let first = last.name.first, first == "/" {
-                        tags.removeLast()
-                        for num in (0..<tags.count).reversed() {
-                            tags[num].status = .close
-                            if tags[num].name.lowercased() == last.name.dropFirst().lowercased() { break }
-                        }
-                    }
-                    last.status = .content
-                } else if last.name.isEmpty || !char.isWhitespace {
-                    last.name = "\(last.name)\(char)".trimmed
-                } else {
-                    optionName = ""
-                    last.status = .optionName
-                }
+                parseTag(last: last, c: char)
             case .optionName:
-                if char == "=" {
-                    if optionName.isEmpty { optionName = preOptionName }
-                    optionName = optionName.trimmed.lowercased()
-                    optionValue = ""
-                    last.status = .optionValue
-                } else if char == ">" {
-                    if SAMIParser.ignorableOpenTags.contains(last.name.lowercased()) {
-                        tags.removeLast()
-                        tags.last?.status = .content
-                        continue
-                    }
-                    last.status = .content
-                } else if optionName.isEmpty || !char.isWhitespace {
-                    optionName = "\(optionName)\(char)".trimmed
-                } else {
-                    preOptionName = optionName
-                    optionName = ""
-                }
+                parseOptionName(last: last, c: char)
             case .optionValue:
-                if char == ">" {
-                    if SAMIParser.ignorableOpenTags.contains(last.name.lowercased()) {
-                        tags.removeLast()
-                        tags.last?.status = .content
-                        continue
-                    }
-                    last.options[optionName] = optionValue
-                    last.status = .content
-                } else if optionValue.isEmpty
-                    || (optionValue.first?.isQuote != true
-                    && !char.isWhitespace) {
-                    optionValue = "\(optionValue)\(char)".trimmed
-                } else if optionValue.first?.isQuote == true {
-                    if (optionValue.first == char) {
-                        last.options[optionName] = String(optionValue.dropFirst())
-                        optionName = ""
-                        last.status = .optionName
-                    } else {
-                        optionValue = "\(optionValue)\(char)"
-                    }
-                } else {
-                    last.options[optionName] = optionValue
-                    optionName = ""
-                    last.status = .optionName
-                }
+                parseOptionValue(last: last, c: char)
             case .content:
-                if char == "<" {
-                    last.content = last.content.trimmed.replacingOccurrences(of: "<\(SAMIParser.brTagString)>", with: "\n")
-                    last.status = .tag
-                    tags.append(Tag(status: .tag))
-                } else if !char.isNewline {
-                    for num in (0..<tags.count).reversed() {
-                        if tags[num].status != .close {
-                            tags[num].content += "\(char)"
-                            break
-                        }
-                    }
-                }
-            case .close: fallthrough
-            case .ready:
-                if char == "<" {
-                    last.content = last.content.trimmed
-                    if last.status != .close {
-                        last.status = .ready
-                    }
-                    tags.append(Tag(status: .tag))
-                } else {
-                    for num in (0..<tags.count).reversed() {
-                        if tags[num].status != .close {
-                            if !char.isNewline {
-                                tags[num].content += "\(char)"
-                            }
-                            break
-                        }
-                    }
-                }
+                parseContent(last: last, c: char)
+            case .ready, .close:
+                parseReady(last: last, c: char)
             }
         }
         return tags
+    }
+
+    private mutating func parseTag(last: Tag, c char: Character) {
+        if char == ">" {
+            if last.name.lowercased() == SAMIParser.brTagString
+                || last.name.lowercased() == SAMIParser.brTagString + "/" {
+                tags.removeLast()
+                tags.last?.content += "<\(SAMIParser.brTagString)>"
+                tags.last?.status = .content
+                return
+            } else if SAMIParser.ignorableTags.contains(last.name.lowercased()) {
+                tags.removeLast()
+                tags.last?.status = .content
+                return
+            } else if let first = last.name.first, first == "/" {
+                tags.removeLast()
+                for num in (0..<tags.count).reversed() {
+                    tags[num].status = .close
+                    if tags[num].name.lowercased() == last.name.dropFirst().lowercased() { break }
+                }
+            }
+            last.status = .content
+        } else if last.name.isEmpty || !char.isWhitespace {
+            last.name = "\(last.name)\(char)".trimmed
+        } else {
+            optionName = ""
+            last.status = .optionName
+        }
+    }
+
+    private mutating func parseOptionName(last: Tag, c char: Character) {
+        if char == "=" {
+            if optionName.isEmpty { optionName = preOptionName }
+            optionName = optionName.trimmed.lowercased()
+            optionValue = ""
+            last.status = .optionValue
+        } else if char == ">" {
+            if SAMIParser.ignorableOpenTags.contains(last.name.lowercased()) {
+                tags.removeLast()
+                tags.last?.status = .content
+                return
+            }
+            last.status = .content
+        } else if optionName.isEmpty || !char.isWhitespace {
+            optionName = "\(optionName)\(char)".trimmed
+        } else {
+            preOptionName = optionName
+            optionName = ""
+        }
+    }
+
+    private mutating func parseOptionValue(last: Tag, c char: Character) {
+        if char == ">" {
+            if SAMIParser.ignorableOpenTags.contains(last.name.lowercased()) {
+                tags.removeLast()
+                tags.last?.status = .content
+                return
+            }
+            last.options[optionName] = optionValue
+            last.status = .content
+        } else if optionValue.isEmpty
+            || (optionValue.first?.isQuote != true
+                && !char.isWhitespace) {
+            optionValue = "\(optionValue)\(char)".trimmed
+        } else if optionValue.first?.isQuote == true {
+            if optionValue.first == char {
+                last.options[optionName] = String(optionValue.dropFirst())
+                optionName = ""
+                last.status = .optionName
+            } else {
+                optionValue = "\(optionValue)\(char)"
+            }
+        } else {
+            last.options[optionName] = optionValue
+            optionName = ""
+            last.status = .optionName
+        }
+    }
+
+    private mutating func parseContent(last: Tag, c char: Character) {
+        if char == "<" {
+            last.content = last.content
+                .trimmed.replacingOccurrences(of: "<\(SAMIParser.brTagString)>", with: "\n")
+            last.status = .tag
+            tags.append(Tag(status: .tag))
+        } else if !char.isNewline {
+            for num in (0..<tags.count).reversed() where tags[num].status != .close {
+                tags[num].content += "\(char)"
+                break
+            }
+        }
+    }
+
+    private mutating func parseReady(last: Tag, c char: Character) {
+        if char == "<" {
+            last.content = last.content.trimmed
+            if last.status != .close {
+                last.status = .ready
+            }
+            tags.append(Tag(status: .tag))
+        } else {
+            for num in (0..<tags.count).reversed() where tags[num].status != .close && !char.isNewline {
+                tags[num].content += "\(char)"
+                break
+            }
+        }
     }
 }
 
@@ -173,17 +190,18 @@ extension Character {
 
 extension Array where Element == Tag {
     func toSyncs() -> [SAMISync] {
-        let tags = self.filter { $0.name.lowercased() == SAMIParser.syncTagString || $0.name.lowercased() == SAMIParser.pTagString }
+        let tags = self.filter { $0.name.lowercased() == SAMIParser.syncTagString
+            || $0.name.lowercased() == SAMIParser.pTagString }
         var syncs = [SAMISync]()
-        
+
         for tag in tags {
             if tag.name.lowercased() == SAMIParser.syncTagString {
                 let time = tag.options[SAMIParser.startOprionString].map(Int.init)
-                
+
                 syncs.append(SAMISync(time: SAMITime(time ?? nil), paragraphs: []))
             } else {
                 let cls = tag.options[SAMIParser.classOptionString]
-                
+
                 let para = SAMIParagraph(class: cls, content: tag.content)
                 if syncs.count > 0 {
                     syncs[syncs.count-1].paragraphs.append(para)

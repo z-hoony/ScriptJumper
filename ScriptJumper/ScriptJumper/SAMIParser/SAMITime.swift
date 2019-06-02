@@ -14,35 +14,35 @@ struct SAMITime: CustomStringConvertible {
     static let msecPerSec: Int = 1 * timescale
     static let msecPerMin: Int = 60 * msecPerSec
     static let mSecPerHour: Int = 60 * msecPerMin
-    
+
     var hour: Int {
         return time / SAMITime.mSecPerHour
     }
-    
+
     var min: Int {
         return (time % SAMITime.mSecPerHour) / SAMITime.msecPerMin
     }
-    
+
     var second: Float {
         return Float((time % SAMITime.msecPerMin) / SAMITime.msecPerSec)
     }
-    
+
     let time: Int
-    
+
     init(_ time: Int) {
         self.time = time
     }
-    
+
     init?(_ time: Int?) {
         guard let time = time else { return nil }
-    
+
         self.time = time
     }
-    
+
     var description: String {
         return String(format: "%02d:%02d:%05.2f", hour, min, second)
     }
-    
+
     var simpleDescription: String {
         return String(format: "%02d:%02d:%02d", hour, min, Int(second))
     }
