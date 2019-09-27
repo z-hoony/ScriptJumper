@@ -132,10 +132,9 @@ class PlayerViewController: UIViewController {
             }
         }
 
-        itemDurationContext = player.currentItem?.observe(\.duration, options: [.new]) { [weak self] (_, change) in
-            guard let duration = change.newValue else { return }
-            self?.controlsView.setTimeSliderMaximum(Float(duration.samiTime.time))
-            self?.controlsView.setDuration(duration.samiTime.simpleDescription)
+        itemDurationContext = player.currentItem?.observe(\.duration, options: [.new]) { [weak self] (item, _) in
+            self?.controlsView.setTimeSliderMaximum(Float(item.duration.samiTime.time))
+            self?.controlsView.setDuration(item.duration.samiTime.simpleDescription)
         }
     }
 

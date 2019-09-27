@@ -16,7 +16,7 @@ class MovieListViewController: UIViewController {
         super.viewDidLoad()
 
         setupUI()
-        loadBundleFiles()
+        loadDocumentFiles()
     }
 
     func setupUI() {
@@ -28,13 +28,24 @@ class MovieListViewController: UIViewController {
         self.tableView.dataSource = self
     }
 
-    func loadBundleFiles() {
+    func loadDocumentFiles() {
         DispatchQueue.global().async { [weak self] in
-            self?.movies = Bundle.main.urls(forResourcesWithExtension: "mp4", subdirectory: nil)?
+            guard let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+                else { return }
+            print(documentURL)
+            self?.movies = try? FileManager.default.contentsOfDirectory(at: documentURL,
+                                                                        includingPropertiesForKeys: nil,
+                                                                        options: .skipsHiddenFiles)
+                .filter {
+                    $0.pathExtension == "mp4" || $0.pathExtension == "mkv"
+                }
                 .map {
-                    let fileName = $0.deletingPathExtension().lastPathComponent
-                    let subtitleURL = Bundle.main.url(forResource: fileName, withExtension: "smi")
-                    return Movie(url: $0, subtitleUrl: subtitleURL)
+                    let subtitleURL = $0.deletingPathExtension().appendingPathExtension("smi")
+                    if FileManager.default.fileExists(atPath: subtitleURL.path) {
+                         return Movie(url: $0, subtitleUrl: subtitleURL)
+                    } else {
+                         return Movie(url: $0, subtitleUrl: nil)
+                    }
             }
 
             DispatchQueue.main.async { [weak self] in
@@ -80,6 +91,7 @@ extension MovieListViewController: UITableViewDelegate {
 
         let viewContoller = PlayerViewController()
         viewContoller.movie = movie
+        viewContoller.modalPresentationStyle = .fullScreen
 
         present(viewContoller, animated: true, completion: nil)
     }

@@ -86,7 +86,7 @@ class ControlsView: UIView {
     }
 
     func setSubtitleListButton(_ isEnabled: Bool) {
-        subtitleListButton.isEnabled = isEnabled
+        subtitleListButton.isHidden = !isEnabled
     }
 
     func setTitle(_ text: String?) {
